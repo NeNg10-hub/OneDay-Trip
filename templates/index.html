@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Tour Trip - Kamphaeng Phet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Modern Clean Color Palette */
+            --bg-color: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        /* พื้นหลังสีสว่างสะอาดตา */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ปรับ Header ให้ดูพรีเมียมและโมเดิร์น */
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: -0.5px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #38bdf8);
+            border-radius: 4px;
+        }
+
+        /* --- Modern Card Style (แทน Glassmorphism เดิม) --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        /* ยังคงใช้ class เดิม แต่เปลี่ยน CSS ภายใน */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            border-color: #cbd5e1;
+        }
+
+        .glass-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.25rem;
+            background-color: #f1f5f9; /* Fallback color */
+        }
+
+        .glass-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .glass-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* --- Modern Flat Button (แทน Neumorphism เดิม) --- */
+        .neu-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            padding: 0.85rem 1.5rem;
+            border-radius: 10px;
+            background: #f1f5f9;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .neu-button:hover {
+            background: #e2e8f0;
+            color: var(--primary-hover);
+            transform: scale(1.02);
+        }
+
+        /* --- Map Section --- */
+        .map-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .map-section h2 {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-container {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            background: #f8fafc;
+            /* เพิ่มความสูงขั้นต่ำให้แผนที่แสดงผลสวยงาม */
+            min-height: 450px; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- Primary Button --- */
+        .explore-btn-container {
+            margin-top: 2rem;
+        }
+
+        .neu-button.primary {
+            display: inline-block;
+            width: auto;
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: #ffffff;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+            font-weight: 500;
+        }
+
+        .neu-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px -3px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .map-section {
+                padding: 2rem 1rem;
+            }
+            .map-container {
+                min-height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mini Tour Trip One Day in Kamphaeng Phet</h1>
+
+        <!-- สถานที่ท่องเที่ยว (Glassmorphism Cards) -->
+        <div class="grid-container">
+            {% for loc in locations %}
+            <div class="glass-card">
+                <img src="{{ loc.image_url }}" alt="{{ loc.name }}">
+                <h3>{{ loc.id }}. {{ loc.name }}</h3>
+                <p>{{ loc.description }}</p>
+                <!-- ปุ่มข้อมูลเส้นทาง (Neumorphism Style) -->
+                <a href="{{ loc.gmap_url }}" target="_blank" class="neu-button">📍 ข้อมูลเส้นทาง</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- แผนที่ Folium รวมด้านล่าง -->
+        <div class="map-section">
+            <h2>เส้นทางทริปแผนที่ (Folium)</h2>
+            <br>
+            <div class="map-container">
+                {{ map_html | safe }}
+            </div>
+            
+            <!-- ปุ่ม Explore Route สำหรับนำทางครบทุกจุด -->
+            <div class="explore-btn-container">
+                <a href="{{ explore_route_url }}" target="_blank" class="neu-button primary">🚗 Explore Route (Google Maps)</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
